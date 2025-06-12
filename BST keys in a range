@@ -1,0 +1,28 @@
+class Solution {
+    // Function to return a list of BST elements in a given range.
+    public static ArrayList<Integer> printNearNodes(Node root, int low, int high) {
+        // code here.
+        ArrayList<Integer>res=new ArrayList<>();
+        if(root==null)
+        {
+            return res;
+        }
+        if(root.data>=low && root.data<=high)
+        {
+            res.addAll(printNearNodes(root.left,low,high));
+            res.add(root.data);
+            res.addAll(printNearNodes(root.right,low,high));
+        }
+        else if(root.data>=high)
+        {
+            res.addAll(printNearNodes(root.left,low,high));
+            
+        }
+        else
+        {
+            res.addAll(printNearNodes(root.right,low,high));
+        }
+        
+        return res;
+    }
+}
