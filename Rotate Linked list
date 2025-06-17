@@ -1,0 +1,50 @@
+/* node of linked list:
+
+class Node{
+    int data;
+    Node next;
+    Node(int d){
+        data=d;
+        next=null;
+    }
+}
+
+*/
+
+class Solution {
+    public Node rotate(Node head, int k) {
+        
+        if(k<=0 || head==null || head.next==null)
+        {
+            return head;
+        }
+        Node temp=head;
+        int s=1;
+        while(temp.next!=null)
+        {
+            s++;
+            temp=temp.next;
+        }
+        temp.next=head;
+       
+        int rotations=k%s;
+        
+        if(rotations==0)
+        {
+            temp.next=null;
+            return head;
+        }
+        int skip=rotations;
+        Node last=head;
+        for(int i=0;i<skip-1;i++)
+        {
+            last=last.next;
+        }
+        head=last.next;
+        last.next=null;
+        
+        return head;
+        
+    }
+    
+}
