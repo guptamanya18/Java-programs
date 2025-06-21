@@ -1,0 +1,11 @@
+
+
+// Function to delete a node without any reference to head pointer.
+class Solution {
+    void deleteNode(Node node) {
+        // Your code here
+        Node temp=node.next;
+        node.data=temp.data;
+        node.next=temp.next;
+    }
+}
