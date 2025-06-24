@@ -1,0 +1,47 @@
+import java.util.* ;
+import java.io.*; 
+/*******************************************************
+
+	Following is the Node class structure
+
+	class Node {
+	    int data;
+	    Node next;
+	    Node child;
+	    
+	    public Node(int data) {
+	        this.data = data;
+	    }
+	}
+
+*******************************************************/
+
+public class Solution {
+    
+    public static Node flattenMultiLinkedList(Node head) {
+        // Write you code here.
+        if(head==null)
+		{
+			return null;
+		}
+		Queue<Node>qu=new ArrayDeque<>();
+
+		Node curr=head;
+		while(curr!=null)
+		{
+			
+			if(curr.child!=null)
+			{
+				qu.add(curr.child);
+				curr.child=null;
+			}
+			if(curr.next==null && !qu.isEmpty())
+			{
+				curr.next=qu.poll();
+			}
+			curr=curr.next;
+		}
+		return head;
+    }
+
+}
