@@ -1,0 +1,51 @@
+/*Node is as follows:
+
+class Node {
+    int data;
+    Node next;
+    Node(int d) {
+        data = d;
+        next = null;
+    }
+}
+
+*/
+
+class Solution {
+    Node zigZag(Node head) {
+        // add code here.
+        Node curr=head;
+        int index=0;
+        while(curr.next!=null)
+        {
+            if(index%2==0)
+            {
+                if(curr.data>curr.next.data)
+                {
+                    swap(curr);
+                }
+               index++; 
+            }
+            else
+            {
+                if(curr.data<curr.next.data)
+                {
+                    swap(curr);
+                }
+                index++;
+            }
+            curr=curr.next;
+            
+            
+        }
+        return head;
+        
+    }
+    
+    void swap(Node a)
+    {
+        int temp=a.data;
+        a.data=a.next.data;
+        a.next.data=temp;
+    }
+}
