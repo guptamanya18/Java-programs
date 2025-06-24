@@ -9,65 +9,69 @@
  * }
  */
 class Solution {
+    public void reorderList(ListNode head) {
+        if(head==null || head.next==null)
+        {
+            return;
+        }
 
-    public ListNode middle(ListNode head){
-        ListNode slow=head;
+        ListNode firstHead=head;
+        ListNode mid=middle(head);
+        ListNode secondHead=reverse(mid);
+        mid.next=null;
+
+        ListNode dummy=new ListNode(0);
+        ListNode temp=dummy;
+
+        while(firstHead!=null && secondHead!=null)
+        {
+            temp.next=firstHead;
+            firstHead=firstHead.next;
+            temp=temp.next;
+            
+
+            temp.next=secondHead;
+            secondHead=secondHead.next;
+
+            temp=temp.next;
+            
+        }
+
+        if(firstHead!=null)
+        {
+             temp.next=firstHead;
+           temp=temp.next;
+        }
+        if(secondHead!=null)
+        {
+            temp.next=secondHead;
+            temp=temp.next;
+        }
+        temp.next=null;
+    }
+    public ListNode middle(ListNode head)
+    {
         ListNode fast=head;
+        ListNode slow=head;
         while(fast!=null && fast.next!=null)
         {
-            slow=slow.next;
             fast=fast.next.next;
-        } 
+            slow=slow.next;
+        }
         return slow;
     }
 
     public ListNode reverse(ListNode head)
     {
-        if(head==null)
-        {
-            return head;
-        }
         ListNode prev=null;
-        ListNode pres=head;
-        ListNode next=pres.next;
-        while(pres!=null)
+        ListNode curr=head;
+        while(curr!=null)
         {
-            pres.next=prev;
-            prev=pres;
-            pres=next;
-            if(next!=null)
-            {
-                next=next.next;
-            }
-
+            ListNode next=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=next;
         }
         return prev;
-
-    }
-
-    public void reorderList(ListNode head) {
-        if(head==null || head.next==null)
-        {
-            return;
-
-        }
-        ListNode mid=middle(head);
-        ListNode SecondHead=reverse(mid);
-
-        while(head!=null && SecondHead!=null)
-        {
-            ListNode temp=head.next;
-            head.next=SecondHead;
-            head=temp;
-
-            temp=SecondHead.next;
-            SecondHead.next=head;
-            SecondHead=temp;
-        }
-        if(head!=null)
-        {
-            head.next=null;
-        }
-
     }
 }
