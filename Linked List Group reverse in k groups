@@ -1,0 +1,48 @@
+/*node class of the linked list
+class Node
+{
+    int data;
+    Node next;
+    Node(int key)
+    {
+        data = key;
+        next = null;
+    }
+}
+
+*/
+
+class Solution {
+    public static Node reverseKGroup(Node head, int k) {
+        // code here
+        Node prevHead=null;
+        Node currHead=head;
+        Node ans=null;
+        
+        while(currHead!=null)
+        {
+            Node prev=null;
+            Node curr=currHead;
+            int j=0;
+            while(j<k && curr!=null){
+            Node next=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=next;
+            j++;
+            } 
+            if(prevHead==null)
+            {
+                ans=prev;
+            }
+            else
+            {
+                prevHead.next=prev;
+            }
+            
+            prevHead=currHead;
+            currHead=curr;
+        }
+        return ans;
+    }
+}
