@@ -1,0 +1,39 @@
+/* Node of a linked list
+ class Node {
+   int data;
+    Node next;
+    Node(int d)  { data = d;  next = null; }
+}
+*/
+
+class Solution {
+    public Pair<Node, Node> splitList(Node head) {
+        // Code here
+        if (head == null) {
+            return new Pair<>(null, null);
+        }
+
+        
+        Node fast=head;
+        Node slow=head;
+        while(fast.next!=head && fast.next.next!=head)
+        {
+            slow=slow.next;
+            fast=fast.next.next;
+    
+        }
+        
+        if (fast.next.next == head) {
+            fast = fast.next;
+        }
+        
+        Node h1=head;
+        Node h2=slow.next;
+        slow.next=h1;
+       fast.next=h2;
+        
+        
+        
+        return new Pair<>(h1,h2);
+    }
+}
