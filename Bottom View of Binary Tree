@@ -1,0 +1,66 @@
+/*
+class Node
+{
+    int data; //data of the node
+    int hd; //horizontal distance of the node
+    Node left, right; //left and right references
+
+    // Constructor of tree node
+    public Node(int key)
+    {
+        data = key;
+        hd = Integer.MAX_VALUE;
+        left = right = null;
+    }
+}
+*/
+
+class Solution {
+    static class Custom{
+        Node node;
+        int col;
+        Custom(Node node,int col)
+        {
+            this.node=node;
+            this.col=col;
+        }
+    }
+    public ArrayList<Integer> bottomView(Node root) {
+        // Code here
+        ArrayList<Integer>res=new ArrayList<>();
+        if(root==null)
+        {
+            return res;
+        }
+        
+        Queue<Custom>qu=new LinkedList<>();
+        qu.add(new Custom(root,0));
+        
+        Map<Integer,Integer>mp=new TreeMap<>();
+        
+        while(!qu.isEmpty())
+        {
+            Custom csnde=qu.poll();
+            Node node=csnde.node;
+            int col=csnde.col;
+            
+            mp.put(col,node.data);
+            
+            if(node.left!=null)
+            {
+                qu.add(new Custom(node.left,col-1));
+            }
+            if(node.right!=null)
+            {
+                qu.add(new Custom(node.right,col+1));
+            }
+        }
+        
+        for(Map.Entry<Integer,Integer>e:mp.entrySet())
+        {
+            res.add(e.getValue());
+        }
+        
+        return res;
+    }
+}
