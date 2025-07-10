@@ -1,0 +1,44 @@
+class Solution {
+    public int cutRod(int[] price) {
+        // code here
+        int[]lenarr=new int[price.length];
+        for(int i=0;i<price.length;i++)
+        {
+            lenarr[i]=i+1;
+        }
+        
+        int n=price.length;
+        int N=lenarr.length;
+        int[][]t=new int[n+1][N+1];
+        
+        for(int i=0;i<n+1;i++)
+        {
+            for(int j=0;j<N+1;j++)
+            {
+                if(i==0 || j==0)
+                {
+                    t[i][j]=0;
+                }
+                
+            }
+        }
+        for(int i=1;i<n+1;i++)
+        {
+            for(int j=1;j<N+1;j++)
+            {
+                if(lenarr[i-1]<=j)
+                {
+                    t[i][j]=Math.max(price[i-1]+t[i][j-lenarr[i-1]],t[i-1][j]);
+                }
+                else
+                
+                {
+                    t[i][j]=t[i-1][j];
+                }
+            }
+            
+        }
+        
+        return t[n][N];
+    }
+}
